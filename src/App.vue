@@ -4,7 +4,11 @@ import NavBar from './components/Navbar.vue'
 </script>
 
 <template>
- <NavBar></NavBar>
+  <div class="App">
+    
+     <NavBar></NavBar>
+  </div>
+
 </template>
 
 <style scoped></style>

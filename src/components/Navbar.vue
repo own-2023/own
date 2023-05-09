@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
@@ -33,7 +34,7 @@
 
                 <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a href="" class="nav-link text-white" role="button">Sign In</a>
+                        <RouterLink  class="nav-link text-white" role="button">Sign In</RouterLink>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link text-white" role="button">Sign Up</a>
@@ -42,10 +43,11 @@
             </div>
         </div>
     </nav>
+
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import router from './../router/router'
 </script>
 
 
