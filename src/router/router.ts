@@ -1,17 +1,16 @@
-import SignIn from './../components/SignIn.vue'
-import {createRouter, createWebHashHistory} from 'vue-router';
+import {createRouter, createWebHashHistory} from 'vue-router'
+import HomeView from './../views/HomeView.vue'
+import SignInView from './../views/SignInView.vue'
+import SignUpView from './../views/SignUpView.vue'
 
-// 2. Define some routes
-// Each route should map to a component.
-// We'll talk about nested routes later.
 const routes = [
-  { path: '/sign-in', name: 'sign-in', component: SignIn },
+  { path: '/sign-in', name: 'sign-in', component: SignInView },
+  {path: '/', name: 'home', component: HomeView},
+  {path: '/sign-up', name: 'sign-up', component: SignUpView}
 ]
 
-// 3. Create the router instance and pass the `routes` option
-// You can pass in additional options here, but let's
-// keep it simple for now.
  const router = createRouter({
+  
   history: createWebHashHistory(),
   routes, 
 })
