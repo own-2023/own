@@ -29,6 +29,8 @@
 </template>
 
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import GoBack from '@/components/GoBack.vue';
+</script>
 
 <style></style>
