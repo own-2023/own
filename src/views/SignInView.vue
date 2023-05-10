@@ -8,7 +8,7 @@
         <div id="sign-in-column" class="col-md-6">
             <div id="sign-in-box" class="col-md-12">
                 <form id="sign-in-form" class="form" action="" method="post">
-                    <h3 class="text-center  text-primary mb-3">Sign In</h3>
+                    <h3 class="text-center  text-primary mb-3">Own</h3>
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                         <label for="floatingInput">Email address</label>
@@ -22,7 +22,7 @@
                         <input type="submit" name="sign-in" class="btn btn-primary btn-md" value="Sign In">
                     </div>
                     <div id="register-link" class="text-right mt-3 text-primary">
-                        <RouterLink to="/sign-up"  class="text-primary">Register here</RouterLink>
+                        <RouterLink to="/sign-up"  class="btn btn-primary">Register here</RouterLink>
                     </div>
                 </form>
             </div>
