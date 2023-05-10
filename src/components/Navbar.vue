@@ -37,7 +37,7 @@
                         <RouterLink to="/sign-in"  class="nav-link text-white" role="button">Sign In</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-white" role="button">Sign Up</a>
+                        <RouterLink to="/sign-up" class="nav-link text-white" role="button">Sign Up</RouterLink>
                     </li>
                 </ul>
             </div>
