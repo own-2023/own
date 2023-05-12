@@ -4,7 +4,6 @@
 <div class="container mt-5">
     <GoBack></GoBack>
     <div id="sign-in-row" class="row justify-content-center align-items-center">
-
         <div id="sign-in-column" class="col-md-6">
             <div id="sign-in-box" class="col-md-12">
                 <form id="sign-in-form" class="form" action="" method="post">

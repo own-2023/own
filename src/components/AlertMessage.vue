@@ -6,7 +6,7 @@ const props = defineProps({
 
 
 <template>
-    <div id="sign-up-row" class="row justify-content-center align-items-center">
+    <div id="sign-up-row" class="col-6 justify-content-center align-items-center">
         <div class="alert alert-danger" role="alert">
             {{ props.errorMessage }}
         </div>

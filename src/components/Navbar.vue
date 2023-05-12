@@ -34,10 +34,16 @@
 
                 <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <RouterLink to="/sign-in"  class="nav-link text-white" role="button">Sign In</RouterLink>
+                        <RouterLink to="/sign-in"  class="nav-link text-white" role="button" v-if="!tokenStore.isAuthenticated">Sign In</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink to="/sign-up" class="nav-link text-white" role="button">Sign Up</RouterLink>
+                        <RouterLink to="/sign-up" class="nav-link text-white" role="button" v-if="!tokenStore.isAuthenticated" >Sign Up</RouterLink>
+                    </li>
+                    <li class="nav-fill">
+                        <RouterLink to="/profile" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated">Profile</RouterLink>
+                    </li>
+                    <li class="nav-fill">
+                        <a href="" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated">Sign Out</a>
                     </li>
                 </ul>
             </div>
@@ -47,6 +53,8 @@
 </template>
 
 <script setup lang="ts">
+import useTokenStore from '@/stores/tokenStore';
+const tokenStore = useTokenStore();
 </script>
 
 
