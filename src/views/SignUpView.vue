@@ -2,7 +2,7 @@
 import GoBack from '@/components/GoBack.vue';
 import { reactive } from 'vue';
 import axios, { AxiosError } from 'axios';
-import router from './../router/router';
+import router from '../router';
 import useEmailStore from '@/stores/emailStore';
 import useTokenStore from '@/stores/tokenStore';
 import useUsernameStore from '@/stores/usernameStore';

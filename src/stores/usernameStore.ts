@@ -8,10 +8,7 @@ const useUsernameStore = defineStore('username', () => {
         username.value = value;
     }
 
-    function reset(){
-        username.value = '';
-    }
-    return { setUsername, getUsername, reset }
+    return { setUsername, getUsername }
 })
 
 export default useUsernameStore;

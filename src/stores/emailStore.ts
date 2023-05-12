@@ -1,19 +1,16 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-const useEmailStore = defineStore('email',() => {
+const useEmailStore = defineStore('email', () => {
     const email = ref('')
     const getEmail = computed(() => email);
 
-    function setEmail(value: string){
+    function setEmail(value: string) {
         email.value = value;
     }
 
-    function reset(){
-        email.value = '';
-    }
 
-    return {email, getEmail, setEmail, reset}
+    return { email, getEmail, setEmail }
 
 })
 

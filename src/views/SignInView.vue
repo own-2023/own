@@ -6,7 +6,7 @@ import useEmailStore from '@/stores/emailStore';
 import useUsernameStore from '@/stores/usernameStore';
 import axios, { AxiosError } from 'axios';
 import { reactive } from 'vue';
-import router from '@/router/router';
+import router from '@/router';
 
 let email: string = ''
 let password: string = ''
@@ -22,7 +22,7 @@ async function signIn() {
         const userStore = useUsernameStore();
         const emailStore = useEmailStore();
         userStore.setUsername(response.data['username']);
-        emailStore.setEmail(response.data['email']);
+        emailStore.setEmail(email);
         tokenStore.setToken(response.data['token']);
         router.push('/')
     }
