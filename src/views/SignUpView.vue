@@ -2,7 +2,9 @@
 import GoBack from '@/components/GoBack.vue';
 import { reactive } from 'vue';
 import axios from 'axios';
-import router from './../router/router'
+import router from './../router/router';
+import useEmailStore from '@/stores/emailStore';
+import useTokenStore from '@/stores/tokenStore';
 
 async function signUp() {
     if(password !== passwordRepeat){
@@ -11,8 +13,12 @@ async function signUp() {
     }
 
     const response = await axios.post('http://127.0.0.1:3000/auth/sign-up', { username, password, email });
-    
+
     if(response.status == 204){
+        const emailStore = useEmailStore();
+        const tokenStore = useTokenStore();
+        emailStore.setEmail(email); 
+        tokenStore.setToken(response.data['token']);
         router.go(-1)
     }
 }

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import NavBar from './components/Navbar.vue'
-import { useAuthenticatedStore} from '@/stores/authenticationStore'
+import  useTokenStore from '@/stores/tokenStore'
 
-const authenticationStore = useAuthenticatedStore();
+const authenticationStore = useTokenStore();
 
 </script>
 

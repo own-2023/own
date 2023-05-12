@@ -1,16 +1,16 @@
 import {defineStore} from 'pinia'
 import { computed, ref } from 'vue'
 
-export const useAuthenticatedStore = defineStore('email',() => {
+const useEmailStore = defineStore('email',() => {
     const email = ref('')
-    function getEmail(): string{
-        return email.value;
-    }
+    const getEmail = computed(() => email);
 
     function setEmail(value: string){
         email.value = value;
     }
 
-    return {email: email, getEmail, setEmail}
+    return {email, getEmail, setEmail}
 
 })
+
+export default useEmailStore;
