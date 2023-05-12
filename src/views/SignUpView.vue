@@ -8,11 +8,14 @@ import useTokenStore from '@/stores/tokenStore';
 import AlertMessage from '@/components/AlertMessage.vue';
 
 async function signUp() {
+    displayGeneralErrorMessage.value = false;
     if (password !== passwordRepeat) {
         passwordRepeatDisplayErrorMessage.value = true;
         return;
     }
-
+    else {
+        passwordRepeatDisplayErrorMessage.value = false;
+    }
 
     try {
         const response = await axios.post('http://127.0.0.1:3000/auth/sign-up', { username, password, email });
@@ -27,11 +30,10 @@ async function signUp() {
     }
     catch (err) {
         if (err instanceof AxiosError) {
-            usernameTakenDisplayErrorMessage.value = true;
+            generalErrorMessage = err.response?.data['error'];
+            displayGeneralErrorMessage.value = true;
         }
-
     }
-
 
 }
 
@@ -41,8 +43,8 @@ let username: string;
 let email: string;
 let passwordRepeatErrorMessage = 'Please repeat password correctly';
 let passwordRepeatDisplayErrorMessage = reactive({ value: false });
-let usernameTakenErrorMessage = 'Username taken';
-let usernameTakenDisplayErrorMessage = reactive({ value: false });
+let generalErrorMessage = 'Error';
+let displayGeneralErrorMessage = reactive({ value: false });
 
 </script>
 
@@ -57,8 +59,7 @@ let usernameTakenDisplayErrorMessage = reactive({ value: false });
                 <div id="sign-up-box" class="col-md-12">
                     <AlertMessage :error-message="passwordRepeatErrorMessage"
                         v-if="passwordRepeatDisplayErrorMessage.value" />
-                    <AlertMessage :error-message="usernameTakenErrorMessage"
-                        v-if="usernameTakenDisplayErrorMessage.value" />
+                    <AlertMessage :error-message="generalErrorMessage" v-if="displayGeneralErrorMessage.value" />
                     <form id="sign-up-form" class="form">
                         <h3 class="text-center  text-primary mb-3">Own</h3>
                         <div class="form-floating mb-3">
