@@ -2,13 +2,19 @@
 import GoBack from '@/components/GoBack.vue';
 import { reactive } from 'vue';
 import axios from 'axios';
+import router from './../router/router'
 
-function signUp() {
+async function signUp() {
     if(password !== passwordRepeat){
         displayErrorMessage.value = true;
         return;
     }
-    axios.post('localhost:3000/sign-up', { username, password, email });
+
+    const response = await axios.post('http://127.0.0.1:3000/auth/sign-up', { username, password, email });
+    
+    if(response.status == 204){
+        router.go(-1)
+    }
 }
 
 let password: string;
