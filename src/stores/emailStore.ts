@@ -9,7 +9,11 @@ const useEmailStore = defineStore('email',() => {
         email.value = value;
     }
 
-    return {email, getEmail, setEmail}
+    function reset(){
+        email.value = '';
+    }
+
+    return {email, getEmail, setEmail, reset}
 
 })
 

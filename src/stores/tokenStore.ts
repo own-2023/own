@@ -12,12 +12,12 @@ const useTokenStore = defineStore('token',() => {
         authentication.value = true;
     }
 
-    function resetToken(){
+    function reset(){
         token.value = '';
         authentication.value = false;
     }
 
-    return {authentication, isAuthenticated, getToken, setToken, resetToken}
+    return {authentication, isAuthenticated, getToken, setToken, reset}
 })
 
 export default useTokenStore;
