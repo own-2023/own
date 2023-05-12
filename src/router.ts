@@ -1,8 +1,8 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import HomeView from './views/HomeView.vue'
-import SignInView from './views/SignInView.vue'
-import SignUpView from './views/SignUpView.vue'
-import ProfileView from '@/views/'
+import HomeView from '@/views/HomeView.vue'
+import SignInView from '@/views/SignInView.vue'
+import SignUpView from '@/views/SignUpView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const routes = [
   { path: '/sign-in', name: 'sign-in', component: SignInView },
