@@ -17,7 +17,7 @@ const useTokenStore = defineStore('token',() => {
         authentication.value = false;
     }
 
-    return {authentication, isAuthenticated, getToken, setToken}
+    return {authentication, isAuthenticated, getToken, setToken, resetToken}
 })
 
 export default useTokenStore;
