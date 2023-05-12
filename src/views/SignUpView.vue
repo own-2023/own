@@ -5,6 +5,7 @@ import axios, { AxiosError } from 'axios';
 import router from './../router/router';
 import useEmailStore from '@/stores/emailStore';
 import useTokenStore from '@/stores/tokenStore';
+import useUsernameStore from '@/stores/usernameStore';
 import AlertMessage from '@/components/AlertMessage.vue';
 
 async function signUp() {
@@ -22,8 +23,10 @@ async function signUp() {
         if (response.status == 204) {
             const emailStore = useEmailStore();
             const tokenStore = useTokenStore();
+            const usernameStore = useUsernameStore();
             emailStore.setEmail(email);
             tokenStore.setToken(response.data['token']);
+            usernameStore.setUsername(username);
             console.log(tokenStore.getToken)
             router.push('/');
         }
