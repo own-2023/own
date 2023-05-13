@@ -40,7 +40,7 @@
                         <RouterLink to="/sign-up" class="nav-link text-white" role="button" v-if="!tokenStore.isAuthenticated" >Sign Up</RouterLink>
                     </li>
                     <li class="nav-fill">
-                        <RouterLink to="/profile" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated">Profile</RouterLink>
+                        <RouterLink :to="{name: 'wallet'}" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated">Profile</RouterLink>
                     </li>
                     <li class="nav-fill">
                         <a href="" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated" @click="resetStores()">Sign Out</a>
