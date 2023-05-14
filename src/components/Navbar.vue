@@ -34,22 +34,29 @@
 
                 <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <RouterLink to="/sign-in"  class="nav-link text-white" role="button" v-if="!tokenStore.isAuthenticated">Sign In</RouterLink>
+                        <RouterLink to="/sign-in" class="nav-link text-white" role="button"
+                            v-if="!tokenStore.isAuthenticated">Sign In</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink to="/sign-up" class="nav-link text-white" role="button" v-if="!tokenStore.isAuthenticated" >Sign Up</RouterLink>
+                        <RouterLink to="/sign-up" class="nav-link text-white" role="button"
+                            v-if="!tokenStore.isAuthenticated">Sign Up</RouterLink>
                     </li>
                     <li class="nav-fill">
-                        <RouterLink :to="{name: 'wallet'}" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated">Profile</RouterLink>
+                        <RouterLink :to="{ name: 'wallet' }" class="nav-link text-white" role="button"
+                            v-if="tokenStore.isAuthenticated">Profile</RouterLink>
                     </li>
                     <li class="nav-fill">
-                        <a href="" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated" @click="resetStores()">Sign Out</a>
+                        <RouterLink to="/nft-mint" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated">Mint NFT</RouterLink>
+                    </li>
+
+                    <li class="nav-fill">
+                        <a href="" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated"
+                            @click="resetStores()">Sign Out</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
 </template>
 
 <script setup lang="ts">

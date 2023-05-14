@@ -4,6 +4,7 @@ import SignInView from '@/views/SignInView.vue';
 import SignUpView from '@/views/SignUpView.vue';
 import ProfileView from '@/views/ProfileView.vue';
 import WalletCard from '@/components/WalletCard.vue';
+import NftMintView from './views/NftMintView.vue';
 
 const routes = [
   { path: '/sign-in', name: 'sign-in', component: SignInView },
@@ -27,7 +28,8 @@ const routes = [
         component: WalletCard
       }
     ]
-  }
+  },
+  { path: '/nft-mint', name: 'nftMint', component: NftMintView }
 ]
 
 const router = createRouter({
