@@ -2,7 +2,7 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-white" href="#">Navbar</a>
+            <div class="navbar-brand"><RouterLink to="/"><img width="70" height="70" src="@/assets/own-logo-navbar.png" alt=""/></RouterLink></div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

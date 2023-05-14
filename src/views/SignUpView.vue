@@ -2,11 +2,12 @@
 import GoBack from '@/components/GoBack.vue';
 import { reactive } from 'vue';
 import axios, { AxiosError } from 'axios';
-import router from '../router';
+import router from '@/router';
 import useEmailStore from '@/stores/emailStore';
 import useTokenStore from '@/stores/tokenStore';
 import useUsernameStore from '@/stores/usernameStore';
 import AlertMessage from '@/components/AlertMessage.vue';
+import NavbarLogo from '@/components/NavbarLogo.vue';
 
 async function signUp() {
     displayGeneralErrorMessage.value = false;
@@ -58,12 +59,11 @@ let displayGeneralErrorMessage = reactive({ value: false });
     <div id="signUp">
         <div class="container mt-5">
             <GoBack></GoBack>
-            <div class="row justify-content-center align-items-center">
-                <div id="sign-up-column" class="col-md-6">
-                    <div id="sign-up-box" class="col-md-12">
-
+            <NavbarLogo/>
+            <div class="row justify-content-center">
+                <div id="sign-up-column" class="justify-content-center col-md-6">
+                    <div id="sign-up-box">
                         <form id="sign-up-form" class="form">
-                            <h3 class="text-center  text-primary mb-3">Own</h3>
                             <AlertMessage :error-message="passwordRepeatErrorMessage"
                                 v-if="passwordRepeatDisplayErrorMessage.value" />
                             <AlertMessage :error-message="generalErrorMessage" v-if="displayGeneralErrorMessage.value" />

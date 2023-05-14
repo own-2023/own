@@ -7,10 +7,11 @@ import useUsernameStore from '@/stores/usernameStore';
 import axios, { AxiosError } from 'axios';
 import { reactive } from 'vue';
 import router from '@/router';
+import NavbarLogo from '@/components/NavbarLogo.vue';
 
 let email: string = ''
 let password: string = ''
-let errorMessage = reactive({value: ''});
+let errorMessage = reactive({ value: '' });
 let displayErrorMessage = reactive({ value: false });
 
 async function signIn() {
@@ -43,11 +44,11 @@ async function signIn() {
     <div id="signIn">
 
         <div class="container mt-5">
-            <GoBack></GoBack>
-            <div id="sign-in-row" class="row justify-content-center align-items-center">
-                <div id="sign-in-column" class="col-md-6">
-                    <div id="sign-in-box" class="col-md-12">
-                        <h3 class="text-center  text-primary mb-3">Own</h3>
+            <GoBack />
+            <NavbarLogo />
+            <div id="sign-in-row" class="row justify-content-center">
+                <div id="sign-in-column" class=" justify-content-center col-md-6">
+                    <div id="sign-in-box">
                         <AlertMessage :error-message="errorMessage.value" v-if="displayErrorMessage.value" />
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
@@ -65,7 +66,7 @@ async function signIn() {
                                 @click="signIn()">
                         </div>
                         <div id="register-link" class="text-right mt-3 text-primary">
-                            <RouterLink to="/sign-up" class="btn btn-primary">Register here</RouterLink>
+                            <RouterLink to="/sign-up" class="btn btn-primary">Register Here</RouterLink>
                         </div>
                     </div>
                 </div>
