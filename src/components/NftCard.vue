@@ -13,6 +13,7 @@ const props = defineProps<{
         <div class="card-body">
             <h6 class="card-title">{{ nftName }}</h6>
             <p class="card-text">{{ price }}</p>
+            <RouterLink to="/" class="stretched-link"></RouterLink>
         </div>
     </div>
 </template>
