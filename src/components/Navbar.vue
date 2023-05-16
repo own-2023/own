@@ -2,7 +2,9 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
-            <div class="navbar-brand"><RouterLink to="/"><img width="70" height="70" src="@/assets/own-logo-navbar.png" alt=""/></RouterLink></div>
+            <div class="navbar-brand">
+                <RouterLink to="/"><img width="70" height="70" src="@/assets/own-logo-navbar.png" alt="" /></RouterLink>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,11 +44,12 @@
                             v-if="!tokenStore.isAuthenticated">Sign Up</RouterLink>
                     </li>
                     <li class="nav-fill">
-                        <RouterLink :to="{ name: 'wallet' }" class="nav-link text-white" role="button"
+                        <RouterLink to="/profile" class="nav-link text-white" role="button"
                             v-if="tokenStore.isAuthenticated">Profile</RouterLink>
                     </li>
                     <li class="nav-fill">
-                        <RouterLink to="/nft-mint" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated">Mint NFT</RouterLink>
+                        <RouterLink to="/nft-mint" class="nav-link text-white" role="button"
+                            v-if="tokenStore.isAuthenticated">Mint NFT</RouterLink>
                     </li>
 
                     <li class="nav-fill">
