@@ -1,9 +1,6 @@
 <template>
     <Navbar></Navbar>
-
-    <div class="row row-cols-6 justify-content-center mt-3 g-5">
-            <NftCardGroup></NftCardGroup>
-    </div>
+    <NftCardGroup></NftCardGroup>
 </template>
 
 <script setup lang="ts">

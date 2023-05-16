@@ -3,6 +3,7 @@ import {reactive} from 'vue';
 import Navbar from '@/components/Navbar.vue';
 import ProfileCard from '@/components/ProfileCard.vue';
 import WalletCard from '@/components/WalletCard.vue';
+import NftCardGroup from '@/components/NftCardGroup.vue';
 
 const btnGroupChoice = reactive({value: 0});
 
@@ -30,7 +31,8 @@ const btnGroupChoice = reactive({value: 0});
             </div>
         </div>
         <div class="mt-4">
-            <RouterView></RouterView>
+            <NftCardGroup v-if="btnGroupChoice.value === 0"></NftCardGroup>
+            <NftCardGroup v-if="btnGroupChoice.value === 1"></NftCardGroup>
         </div>
     </div>
 </template>
