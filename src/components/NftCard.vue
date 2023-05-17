@@ -1,10 +1,12 @@
 <script setup lang="ts">
 
 const props = defineProps<{
-    nftName: String,
-    price: Number,
-    nftId: Number,
+    nftName: string,
+    price: number,
+    nftId: number,
 }>()
+
+console.log(props)
 
 </script>
 

@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import NftCard from './NftCard.vue';
 
+const props = defineProps<{
+     nfts: Array<{ nftImageUrl: string, nftName: string, nftPrice: number, nftId: number }>
+}>()
+
+
 </script>
 
 <template>
      <div class="row row-cols-6 justify-content-center mt-3 g-5">
-          <NftCard v-for="n in 10" :key="n" nft-name="Halil" :nft-id="50" :price="10"></NftCard>
+          <NftCard v-for="(nft, index) in props.nfts" :key="index" :nft-name="nft.nftName" :nft-id="nft.nftId"
+               :price="nft.nftId"></NftCard>
      </div>
 </template>
 
