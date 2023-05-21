@@ -2,7 +2,6 @@
 import Navbar from '@/components/Navbar.vue';
 
 
-
 let nftName: string;
 let nftImgSrc: string;
 let nftPrice: string;

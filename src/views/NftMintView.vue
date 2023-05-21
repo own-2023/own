@@ -6,12 +6,16 @@ import Navbar from '@/components/Navbar.vue';
 import { reactive } from 'vue';
 
 
-let nftImage: File;
+
 let nftName: string;
+let imageFile: File;
 let statusText = reactive({ status: 'Mint nft' });
 
 async function onClick(event: MouseEvent) {
-    const resData = await axios.post('http://127.0.0.1:3000/eth-transactions/picture', { 'nftImage': nftImage, 'nftName': nftName });
+    let form: FormData = new FormData();
+    form.set('file', imageFile);
+    form.set('name', nftName);
+    const resData = await axios.post('http://127.0.0.1:4000/ipfs/upload', form);
     statusText.status = resData.statusText;
 }
 
@@ -19,7 +23,7 @@ async function onClick(event: MouseEvent) {
 function onChange(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target && target.files) {
-        nftImage = target.files[0];
+        imageFile = target.files[0];
     }
 }
 
