@@ -1,7 +1,7 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <h3>Wallet</h3>
+            <h3 class="text-center">Wallet</h3>
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">

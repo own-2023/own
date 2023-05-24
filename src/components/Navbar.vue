@@ -48,8 +48,8 @@
                             v-if="tokenStore.isAuthenticated">Profile</RouterLink>
                     </li>
                     <li class="nav-fill">
-                        <RouterLink to="/nft-mint" class="nav-link text-white" role="button"
-                            v-if="tokenStore.isAuthenticated">Mint NFT</RouterLink>
+                        <RouterLink to="/nft-upload" class="nav-link text-white" role="button"
+                            v-if="tokenStore.isAuthenticated">Upload NFT</RouterLink>
                     </li>
 
                     <li class="nav-fill">

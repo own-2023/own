@@ -4,21 +4,22 @@
 import axios from 'axios';
 import Navbar from '@/components/Navbar.vue';
 import { reactive } from 'vue';
+import useTokenStore from '@/stores/tokenStore';
 
+const tokenStore = useTokenStore()
 
 
 let nftName: string;
 let imageFile: File;
-let statusText = reactive({ status: 'Mint nft' });
+let statusText = reactive({ status: 'Upload nft' });
 
 async function onClick(event: MouseEvent) {
     let form: FormData = new FormData();
     form.set('file', imageFile);
-    form.set('name', nftName);
-    const resData = await axios.post('http://127.0.0.1:4000/ipfs/upload', form);
+    form.set('nftName', nftName);
+    const resData = await axios.post(`http://127.0.0.1:4000/ipfs/upload`, form, { headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } });
     statusText.status = resData.statusText;
 }
-
 
 function onChange(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -26,8 +27,6 @@ function onChange(event: Event) {
         imageFile = target.files[0];
     }
 }
-
-
 </script>
 
 <template>

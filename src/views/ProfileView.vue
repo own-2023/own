@@ -1,11 +1,23 @@
 <script setup lang="ts">
-import {reactive} from 'vue';
+import { reactive, onMounted } from 'vue';
 import Navbar from '@/components/Navbar.vue';
 import ProfileCard from '@/components/ProfileCard.vue';
 import WalletCard from '@/components/WalletCard.vue';
 import NftCardGroup from '@/components/NftCardGroup.vue';
+import axios from 'axios';
+import useTokenStore from '@/stores/tokenStore';
 
-const btnGroupChoice = reactive({value: 0});
+
+const tokenStore = useTokenStore();
+let nfts = reactive({ value: [] });
+
+
+onMounted(async () => {
+    const response = await axios.get(`http://127.0.0.1:4000/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } })
+    nfts.value = response.data;
+})
+
+console.log(nfts);
 
 
 
@@ -17,22 +29,12 @@ const btnGroupChoice = reactive({value: 0});
         <div class="mt-3 mb-1">
             <ProfileCard />
         </div>
-        <WalletCard/>
+        <WalletCard />
     </div>
     <div class="row justify-content-center">
-        <div class="col-auto">
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked
-                    @click="btnGroupChoice.value = 0">
-                <label class="btn btn-outline-primary" for="btnradio1">Owned NFTs</label>
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
-                    @click="btnGroupChoice.value = 1">
-                <label class="btn btn-outline-primary" for="btnradio2">NFTs ON Market</label>
-            </div>
-        </div>
-        <div class="mt-4">
-            <NftCardGroup v-if="btnGroupChoice.value === 0"></NftCardGroup>
-            <NftCardGroup v-if="btnGroupChoice.value === 1"></NftCardGroup>
+        <div class="mt-4 mb-4">
+            <h3 class="text-center">Owned Nfts</h3>
+            <NftCardGroup :nfts=nfts.value></NftCardGroup>
         </div>
     </div>
 </template>
