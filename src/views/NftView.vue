@@ -1,24 +1,28 @@
 <script setup lang="ts">
 import Navbar from '@/components/Navbar.vue';
+import axios from 'axios';
+import {onMounted, reactive} from 'vue';
+
+let nftName = reactive({value: ''});
+let nftImgSrc = reactive({value: ''});
+let nftPrice = reactive({value: ''});
+let nftOwnerUsername = reactive({value: ''});
 
 
-let nftName: string;
-let nftImgSrc: string;
-let nftPrice: string;
-let nftOwnerUsername: string;
+onMounted(() => {
+axios.get('http://127.0.0.1:4000/')
+})
 
 </script>
-
-
 
 <template>
     <Navbar />
     <div class="row justify-content-center m-5">
         <div class="col-4 border border-2 text-center">
-            <img src="@/assets/160x160 (7).png" class="img-fluid">
-            <h2>Knife1</h2>
-            <h4>Owned by Halil</h4>
-            <h5>50ETH</h5>
+            <img :src="nftImgSrc.value" class="img-fluid">
+            <h2>{{ nftName.value }}</h2>
+            <h4>Owned by {{ nftOwnerUsername.value }}</h4>
+            <h5>{{ nftPrice.value }} ETH</h5>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Arcu odio ut sem nulla. Eu scelerisque felis imperdiet proin fermentum leo. Faucibus

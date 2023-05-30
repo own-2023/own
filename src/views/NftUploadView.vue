@@ -20,7 +20,6 @@ async function onClick(event: MouseEvent) {
     const resData = await axios.post(`http://127.0.0.1:4000/ipfs/upload`, form, { headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } });
     statusText.status = resData.statusText;
 }
-
 function onChange(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target && target.files) {
