@@ -17,7 +17,7 @@ async function onClick(event: MouseEvent) {
     let form: FormData = new FormData();
     form.set('file', imageFile);
     form.set('nftName', nftName);
-    const resData = await axios.post(`http://127.0.0.1:4000/ipfs/upload`, form, { headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } });
+    const resData = await axios.post(`http://127.0.0.1:4000/ipfs/upload`, form, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
     statusText.status = resData.statusText;
 }
 function onChange(event: Event) {

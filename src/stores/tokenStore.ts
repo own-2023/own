@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 const useTokenStore = defineStore('token', () => {
     const authentication = ref(false);
     const token = ref('');
-    const getToken = computed(() => token);
+    const getToken = computed(() => token.value);
     const isAuthenticated = computed(() => token.value != '');
 
     function setToken(value: string) {

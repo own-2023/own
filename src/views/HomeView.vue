@@ -1,87 +1,34 @@
 <script setup lang="ts">
 import NftCardGroup from '@/components/NftCardGroup.vue';
 import Navbar from './../components/Navbar.vue'
+import axios from 'axios';
+import { onMounted, reactive } from 'vue';
 
 
-const nfts = [{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife1',
-    nftPrice: 50,
-    nftId: 23,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife2',
-    nftPrice: 28,
-    nftId: 3,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife3',
-    nftPrice: 79,
-    nftId: 78,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife1',
-    nftPrice: 50,
-    nftId: 23,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife2',
-    nftPrice: 28,
-    nftId: 3,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife3',
-    nftPrice: 79,
-    nftId: 78,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife1',
-    nftPrice: 50,
-    nftId: 23,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife2',
-    nftPrice: 28,
-    nftId: 3,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife3',
-    nftPrice: 79,
-    nftId: 78,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife1',
-    nftPrice: 50,
-    nftId: 23,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife2',
-    nftPrice: 28,
-    nftId: 3,
-},
-{
-    nftImageUrl: 'src/assets/160x160 (7).png',
-    nftName: 'Knife3',
-    nftPrice: 79,
-    nftId: 78,
-}]
+class Nfts {
+    constructor(){
+        this.nfts = []
+    }
+
+    public nfts: {nftImageUrl:string, nftName:string, nftPrice: number, nftId: number}[]
+}
+
+const nfts = new Nfts();
+
+
+onMounted(async () => {
+    const nftsRespose = await axios.get('http://127.0.0.1/nfts/get-all-nfts');
+    console.log(nftsRespose.data)
+    nfts.nfts = nftsRespose.data;
+})
+
 </script>
 
 
 
 <template>
     <Navbar></Navbar>
-    <NftCardGroup :nfts=nfts></NftCardGroup>
+    <NftCardGroup :nfts=nfts.nfts></NftCardGroup>
 </template>
 
 

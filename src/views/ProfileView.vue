@@ -15,9 +15,10 @@ let account = reactive({ value: { address: "",private_key: "", user_id: "", bala
 
 
 onMounted(async () => {
-    const nftsReponse = await axios.get(`http://127.0.0.1:4000/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } })
-    const accountResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-account` ,{ headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } })
-    const balanceResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-balance/${accountResponse.data.address}` ,{ headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } })
+    console.log(tokenStore.getToken)
+    const nftsReponse = await axios.get(`http://127.0.0.1:4000/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } })
+    const accountResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-account` ,{ headers: { Authorization: `Bearer ${tokenStore.getToken}` } })
+    const balanceResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-balance/${accountResponse.data.address}` ,{ headers: { Authorization: `Bearer ${tokenStore.getToken}` } })
 
     nfts.value = nftsReponse.data;
     account.value = accountResponse.data;

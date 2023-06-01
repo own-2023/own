@@ -10,6 +10,7 @@ import AlertMessage from '@/components/AlertMessage.vue';
 import NavbarLogo from '@/components/NavbarLogo.vue';
 
 async function signUp() {
+    console.log('entered');
     displayGeneralErrorMessage.value = false;
     if (password !== passwordRepeat) {
         passwordRepeatDisplayErrorMessage.value = true;
@@ -20,21 +21,24 @@ async function signUp() {
     }
 
     try {
+        console.log('Succesful');
         const response = await axios.post('http://127.0.0.1:3000/auth/sign-up', { username, password, email });
-        if (response.status == 204) {
-            const emailStore = useEmailStore();
-            const tokenStore = useTokenStore();
-            const usernameStore = useUsernameStore();
-            emailStore.setEmail(email);
-            tokenStore.setToken(response.data['token']);
-            usernameStore.setUsername(username);
-            console.log(tokenStore.getToken)
-            router.push('/');
-        }
+        console.log(response);
+        const emailStore = useEmailStore();
+        const tokenStore = useTokenStore();
+        const usernameStore = useUsernameStore();
+        emailStore.setEmail(email);
+        tokenStore.setToken(response.data['token']);
+        usernameStore.setUsername(username);
+        router.push({
+            name: 'home'
+        })
+
     }
     catch (err) {
         if (err instanceof AxiosError) {
             generalErrorMessage = err.response?.data['error'];
+            console.error(err);
             displayGeneralErrorMessage.value = true;
         }
     }
@@ -59,7 +63,7 @@ let displayGeneralErrorMessage = reactive({ value: false });
     <div id="signUp">
         <div class="container mt-5">
             <GoBack></GoBack>
-            <NavbarLogo/>
+            <NavbarLogo />
             <div class="row justify-content-center">
                 <div id="sign-up-column" class="justify-content-center col-md-6">
                     <div id="sign-up-box">
@@ -89,7 +93,7 @@ let displayGeneralErrorMessage = reactive({ value: false });
                             </div>
                             <div class="form-group mt-3">
                                 <input type="submit" name="Sign-Up" class="btn btn-primary btn-md" value="Sign Up"
-                                    @click="signUp">
+                                    @click="signUp()">
                             </div>
                         </form>
                     </div>
