@@ -6,26 +6,59 @@ import WalletCard from '@/components/WalletCard.vue';
 import NftCardGroup from '@/components/NftCardGroup.vue';
 import axios from 'axios';
 import useTokenStore from '@/stores/tokenStore';
+import type { UserLazyMintNftDto, AccountDto } from '@/types/types';
+
+
+
 
 
 const tokenStore = useTokenStore();
-let nfts = reactive({ value: [] });
-let account = reactive({ value: { address: "",private_key: "", user_id: "", balance: ""} });
-
+const nfts = reactive({ value: [] });
+let account: AccountDto = reactive<AccountDto>({
+    address: '',
+    private_key: '',
+    user_id: '',
+    balance: '',
+  });
+let userNfts = reactive<UserLazyMintNftDto[]>([]);
 
 
 onMounted(async () => {
-    const nftsReponse = await axios.get(`http://127.0.0.1:4000/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } })
-    const accountResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-account` ,{ headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } })
-    const balanceResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-balance/${accountResponse.data.address}` ,{ headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } })
+  const authToken = tokenStore.getToken.value;
 
-    nfts.value = nftsReponse.data;
-    account.value = accountResponse.data;
-    account.value.balance = balanceResponse.data.balance;    
+  try {
+    const [nftsResponse, accountResponse, userNftsResponse]:any = await Promise.all([
+      axios.get('http://127.0.0.1:4000/nfts/get-user-nfts', {
+        headers: { Authorization: `Bearer ${authToken}` },
+      }),
+      axios.get('http://127.0.0.1:4000/ethereum/get-account', {
+        headers: { Authorization: `Bearer ${authToken}` },
+      }),
+      axios.get('http://127.0.0.1:4000/nfts/get-user-lazy-minted-nfts', {
+        headers: { Authorization: `Bearer ${authToken}` },
+      }),
+    ]);
 
-    //account.value.balance = balanceResponse.data.balance;
-    console.log(account.value)
-})
+    const address = accountResponse.data.address;
+    const balanceResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-balance/${address}`,{
+          headers: { Authorization: `Bearer ${authToken}` },
+        })
+
+    const test = await   axios.get('http://127.0.0.1:4000/nfts/get-user-lazy-minted-nfts', {
+        headers: { Authorization: `Bearer ${authToken}` },
+      })
+
+    nfts.value = nftsResponse.data;
+    userNfts = userNftsResponse.data;
+    account = accountResponse.data;
+    account.balance = balanceResponse.data.balance;
+
+    console.log(userNfts);
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+});
 
 
 
@@ -38,7 +71,7 @@ onMounted(async () => {
         <div class="mt-3 mb-1">
             <ProfileCard  />
         </div>
-        <WalletCard  v-bind:account="account.value"> </WalletCard>
+        <WalletCard  v-bind:account="account"> </WalletCard>
     </div>
     <div class="row justify-content-center">
         <div class="mt-4 mb-4">
