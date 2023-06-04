@@ -1,16 +1,27 @@
 <script setup lang="ts">
 import Navbar from '@/components/Navbar.vue';
 import axios from 'axios';
-import {onMounted, reactive} from 'vue';
+import { onMounted, reactive } from 'vue';
+import { useRoute } from 'vue-router';
+import type { AxiosResponse } from 'axios';
 
-let nftName = reactive({value: ''});
-let nftImgSrc = reactive({value: ''});
-let nftPrice = reactive({value: ''});
-let nftOwnerUsername = reactive({value: ''});
+let nftName = reactive({ value: '' });
+let nftImgSrc = reactive({ value: '' });
+let nftPrice = reactive({ value: '' });
+let nftOwnerUsername = reactive({ value: '' });
+const route = useRoute();
 
 
-onMounted(() => {
-axios.get('http://127.0.0.1:4000/')
+
+onMounted(async () => {
+    let response: AxiosResponse<any, any>;
+    try {
+        response = await axios.get(`http://127.0.0.1:4000/nfts/${route.params.id}`)
+    }
+    catch (err) {
+        console.log(err);
+    }
+
 })
 
 </script>

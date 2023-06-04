@@ -7,8 +7,6 @@ const props = defineProps<{
     nftImageUrl: string,
 }>()
 
-console.log(props)
-
 </script>
 
 <template>
@@ -17,7 +15,7 @@ console.log(props)
         <div class="card-body focus-ring">
             <h6 class="card-title">{{ nftName }}</h6>
             <p class="card-text">{{ price }}</p>
-            <RouterLink :to="`/nft/${nftId}`" class="stretched-link"></RouterLink>
+            <RouterLink :to="`/nft/${nftId}`"   class="stretched-link"></RouterLink>
         </div>
     </div>
 </template>
