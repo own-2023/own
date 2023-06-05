@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-const userIdStore = defineStore('userId', () => {
+const useUserIdStore = defineStore('userId', () => {
     const userId = ref('')
     const getUserId = computed(() => userId);
 
@@ -14,4 +14,4 @@ const userIdStore = defineStore('userId', () => {
 
 })
 
-export default userIdStore;
+export default useUserIdStore;

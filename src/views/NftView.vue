@@ -15,7 +15,7 @@ let nftOwnerUsername: string;
     <Navbar />
     <div class="row justify-content-center m-5">
         <div class="col-4 border border-2 text-center">
-            <img src="@/assets/160x160 (7).png" class="img-fluid">
+            <img src="@/assets/item.png" class="img-fluid">
             <h2>Knife1</h2>
             <h4>Owned by Halil</h4>
             <h5>50ETH</h5>

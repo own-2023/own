@@ -11,12 +11,15 @@ const tokenStore = useTokenStore()
 
 let nftName: string;
 let imageFile: File;
+let nftPrice: string;
 let statusText = reactive({ status: 'Upload nft' });
 
 async function onClick(event: MouseEvent) {
     let form: FormData = new FormData();
     form.set('file', imageFile);
     form.set('nftName', nftName);
+    form.set('price', nftPrice);
+    
     const resData = await axios.post(`http://127.0.0.1:4000/ipfs/upload`, form, { headers: { Authorization: `Bearer ${tokenStore.getToken.value}` } });
     statusText.status = resData.statusText;
 }
@@ -42,6 +45,10 @@ function onChange(event: Event) {
                     <div class="mb-3">
                         <label for="nftName" class="form-label">NFT Name</label>
                         <input type="text" class="form-control" v-model="nftName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">NFT Price</label>
+                        <input type="text" class="form-control" v-model="nftPrice">
                     </div>
                     <button type="submit" class="btn btn-primary" @click="onClick">Submit</button>
                     <div class="mt-3">

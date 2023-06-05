@@ -6,8 +6,10 @@ import router from '@/router';
 import useEmailStore from '@/stores/emailStore';
 import useTokenStore from '@/stores/tokenStore';
 import useUsernameStore from '@/stores/usernameStore';
+
 import AlertMessage from '@/components/AlertMessage.vue';
 import NavbarLogo from '@/components/NavbarLogo.vue';
+import useUserIdStore from '@/stores/useridStore';
 
 async function signUp() {
     displayGeneralErrorMessage.value = false;
@@ -25,9 +27,11 @@ async function signUp() {
             const emailStore = useEmailStore();
             const tokenStore = useTokenStore();
             const usernameStore = useUsernameStore();
+            const userIdStore = useUserIdStore();
             emailStore.setEmail(email);
             tokenStore.setToken(response.data['token']);
             usernameStore.setUsername(username);
+            userIdStore.setUserId(response.data['user_id']);
             console.log(tokenStore.getToken)
             router.push('/');
         }
