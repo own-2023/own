@@ -30,10 +30,6 @@ onMounted(async () => {
     account.value.private_key = accountResponse.data.private_key;
     account.value.address = accountResponse.data.address;
     account.value.balance = balanceResponse.data.balance;
-
-
-    //account.value.balance = balanceResponse.data.balance;
-    console.log(account.value)
 })
 
 
