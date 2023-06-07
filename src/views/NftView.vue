@@ -8,11 +8,30 @@ import useUsernameStore from '@/stores/usernameStore';
 
 let nftName = reactive({ value: '' });
 let nftImgSrc = reactive({ value: '' });
-let nftPrice = reactive({ value: '' });
+let nftPrice = reactive({ value: 0 });
 let nftOwnerUsername = reactive({ value: '' });
 const route = useRoute();
-let usernameStore = useUsernameStore();
-let displayPutOnSale = reactive({value: false});
+let displayPutOnSale = reactive({ value: false });
+let displaySuccesMessage = reactive({ value: false });
+let displayFailureMessage = reactive({ value: false });
+let newNftPrice = reactive({ value: 0 });
+
+async function setPrice() {
+    displaySuccesMessage.value = false;
+    displayFailureMessage.value = false;
+    try {
+        let response = await axios.put(`http://127.0.0.1:4000/nfts/${route.params.nftId}/set-price/${newNftPrice}`);
+        if (response.status === 200) {
+            nftPrice.value = response.data['price'];
+            displaySuccesMessage.value = true;
+            return;
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+    displayFailureMessage.value = true;
+}
 
 
 onMounted(async () => {
@@ -20,13 +39,20 @@ onMounted(async () => {
     let response: AxiosResponse<any, any>;
     try {
         response = await axios.get(`http://127.0.0.1:4000/nfts/${route.params.nftId}`);
-        nftPrice.value = response.data['nftPrice']
+        nftPrice.value = response.data['nftPrice'];
         nftName.value = response.data['nftName'];
         nftImgSrc.value = response.data['nftUrl'];
         nftOwnerUsername.value = response.data['nftOwner']
     }
     catch (err) {
         console.log(err);
+    }
+
+    if (nftPrice.value == 0) {
+        displayPutOnSale.value = true;
+    }
+    else {
+        displayPutOnSale.value = false;
     }
 
 })
@@ -42,8 +68,12 @@ onMounted(async () => {
             <h4>Owned by {{ nftOwnerUsername.value }}</h4>
             <h5>{{ nftPrice.value }} ETH</h5>
             <button type="button" class="btn btn-primary mb-3" v-if="false">Buy</button>
-            <button class="btn btn-primary mb-3" href="#" role="button" v-if="true">Put On Sale</button>
-            
+            <button class="btn btn-primary mb-3" href="#" role="button" v-if="true" @click="setPrice">Put On Sale</button>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" placeholder="0" v-model="newNftPrice">
+                <label for="floatingInput">Price</label>
+            </div>
+
         </div>
     </div>
 </template>

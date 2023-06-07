@@ -10,7 +10,6 @@ import AlertMessage from '@/components/AlertMessage.vue';
 import NavbarLogo from '@/components/NavbarLogo.vue';
 
 async function signUp() {
-    console.log('entered');
     displayGeneralErrorMessage.value = false;
     if (password !== passwordRepeat) {
         passwordRepeatDisplayErrorMessage.value = true;
@@ -21,9 +20,7 @@ async function signUp() {
     }
 
     try {
-        console.log('Succesful');
         const response = await axios.post('http://127.0.0.1:3000/auth/sign-up', { username, password, email });
-        console.log(response);
         const emailStore = useEmailStore();
         const tokenStore = useTokenStore();
         const usernameStore = useUsernameStore();
@@ -33,7 +30,6 @@ async function signUp() {
         router.push({
             name: 'home'
         })
-
     }
     catch (err) {
         if (err instanceof AxiosError) {

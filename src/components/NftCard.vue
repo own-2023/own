@@ -14,7 +14,7 @@ const props = defineProps<{
         <img :src="nftImageUrl" class="card-img-top" alt="...">
         <div class="card-body focus-ring">
             <h6 class="card-title">{{ nftName }}</h6>
-            <p class="card-text">{{ price }}</p>
+            <h6 class="card-text">{{ price }} ETH</h6>
             <RouterLink :to="`/nft/${nftId}`"   class="stretched-link"></RouterLink>
         </div>
     </div>
