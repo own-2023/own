@@ -5,25 +5,29 @@ import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import type { AxiosResponse } from 'axios';
 import useUsernameStore from '@/stores/usernameStore';
+const usernameStore = useUsernameStore()
 
 let nftName = reactive({ value: '' });
 let nftImgSrc = reactive({ value: '' });
 let nftPrice = reactive({ value: 0 });
 let nftOwnerUsername = reactive({ value: '' });
-const route = useRoute();
 let displayPutOnSale = reactive({ value: false });
-let displaySuccesMessage = reactive({ value: false });
+let displaySuccessMessage = reactive({ value: false });
 let displayFailureMessage = reactive({ value: false });
+let displayOnSaleMessage = reactive({ value: false });
+let displayOwnerOptions = reactive({ value: false });
 let newNftPrice = reactive({ value: 0 });
+let userUsername = '';
+const route = useRoute();
 
 async function setPrice() {
-    displaySuccesMessage.value = false;
+    displaySuccessMessage.value = false;
     displayFailureMessage.value = false;
     try {
         let response = await axios.put(`http://127.0.0.1:4000/nfts/${route.params.nftId}/set-price/${newNftPrice}`);
         if (response.status === 200) {
             nftPrice.value = response.data['price'];
-            displaySuccesMessage.value = true;
+            displaySuccessMessage.value = true;
             return;
         }
     }
@@ -42,7 +46,10 @@ onMounted(async () => {
         nftPrice.value = response.data['nftPrice'];
         nftName.value = response.data['nftName'];
         nftImgSrc.value = response.data['nftUrl'];
-        nftOwnerUsername.value = response.data['nftOwner']
+        nftOwnerUsername.value = response.data['nftOwner'];
+        if (nftOwnerUsername.value === usernameStore.getUsername.value) {
+            displayOwnerOptions.value = true;
+        }
     }
     catch (err) {
         console.log(err);
@@ -54,7 +61,6 @@ onMounted(async () => {
     else {
         displayPutOnSale.value = false;
     }
-
 })
 
 </script>
