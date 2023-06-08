@@ -1,25 +1,26 @@
 <script setup lang="ts">
 import NftCardGroup from '@/components/NftCardGroup.vue';
 import Navbar from './../components/Navbar.vue'
-import axios from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 import { onMounted, reactive } from 'vue';
 
 
-class Nfts {
-    constructor(){
-        this.nfts = []
-    }
 
-    public nfts: {nftImageUrl:string, nftName:string, nftPrice: number, nftId: string}[]
-}
 
-const nfts = new Nfts();
+const nfts = reactive({data: []});
 
 
 onMounted(async () => {
-    const nftsRespose = await axios.get('http://127.0.0.1/nfts/get-all-nfts');
-    console.log(nftsRespose.data);
-    nfts.nfts = nftsRespose.data;
+    let nftsRespose: AxiosResponse<any, any>;
+    try {
+        nftsRespose = await axios.get('http://127.0.0.1:4000/nfts/get-all-nfts');
+        console.log(nftsRespose.data);
+        nfts.data = nftsRespose.data;
+    }
+    catch (err) {
+        console.log(err);
+    }
+    
 })
 
 </script>
@@ -28,7 +29,7 @@ onMounted(async () => {
 
 <template>
     <Navbar></Navbar>
-    <NftCardGroup :nfts=nfts.nfts></NftCardGroup>
+    <NftCardGroup :nfts=nfts.data></NftCardGroup>
 </template>
 
 

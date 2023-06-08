@@ -24,7 +24,7 @@ async function signIn() {
         const emailStore = useEmailStore();
         userStore.setUsername(response.data['username']);
         emailStore.setEmail(email);
-        console.log(response.data['token'])
+
         tokenStore.setToken(response.data['token']);
         router.push('/');
     }

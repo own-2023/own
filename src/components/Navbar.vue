@@ -28,7 +28,7 @@
                     </li>
                     <li class="nav-fill">
                         <RouterLink to="/nft-upload" class="nav-link text-white" role="button"
-                            v-if="tokenStore.isAuthenticated">Upload NFT</RouterLink>
+                            v-if="tokenStore.isAuthenticated">Upload NFT Metadata</RouterLink>
                     </li>
 
                     <li class="nav-fill">

@@ -15,17 +15,12 @@ let account = reactive({ value: { address: "", private_key: "", user_id: "", bal
 
 
 onMounted(async () => {
-    console.log()
-
-
 
     const [nftsReponse, accountResponse] = await Promise.all([
         axios.get(`http://127.0.0.1:4000/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
         axios.get(`http://127.0.0.1:4000/ethereum/get-account`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
     ]);
-    console.log(`http://127.0.0.1:4000/ethereum/get-balance/${accountResponse.data.address}`)
     const balanceResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-balance/${accountResponse.data.address}`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
-
     nfts.value = nftsReponse.data;
     account.value.private_key = accountResponse.data.private_key;
     account.value.address = accountResponse.data.address;
