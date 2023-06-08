@@ -10,7 +10,7 @@ class Nfts {
         this.nfts = []
     }
 
-    public nfts: {nftImageUrl:string, nftName:string, nftPrice: number, nftId: number}[]
+    public nfts: {nftImageUrl:string, nftName:string, nftPrice: number, nftId: string}[]
 }
 
 const nfts = new Nfts();
@@ -18,6 +18,7 @@ const nfts = new Nfts();
 
 onMounted(async () => {
     const nftsRespose = await axios.get('http://127.0.0.1/nfts/get-all-nfts');
+    console.log(nftsRespose.data);
     nfts.nfts = nftsRespose.data;
 })
 

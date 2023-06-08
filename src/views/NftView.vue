@@ -45,7 +45,8 @@ onMounted(async () => {
         nftName.value = response.data['nftName'];
         nftImgSrc.value = response.data['nftUrl'];
         nftOwnerUsername.value = response.data['nftOwner'];
-        isOnSale.value = response.data['isOnSale'] as boolean;
+        isOnSale.value = response.data['nftIsOnSale'] as boolean;
+        console.log(response.data['nftIsOnSale']);
         if (nftOwnerUsername.value === usernameStore.getUsername.value) {
             displayOwnerOptions.value = true;
         }

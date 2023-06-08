@@ -2,7 +2,7 @@
 import NftCard from './NftCard.vue';
 
 const props = defineProps<{
-     nfts: Array<{ nftImageUrl: string, nftName: string, nftPrice: number, nftId: number }>
+     nfts: Array<{ nftImageUrl: string, nftName: string, nftPrice: number, nftId: string }>
 }>()
 
 

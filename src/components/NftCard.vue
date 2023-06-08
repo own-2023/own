@@ -3,7 +3,7 @@
 const props = defineProps<{
     nftName: string,
     price: number,
-    nftId: number,
+    nftId: string,
     nftImageUrl: string,
 }>()
 </script>
