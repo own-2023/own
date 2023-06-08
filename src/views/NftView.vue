@@ -13,45 +13,42 @@ let nftName = reactive({ value: '' });
 let nftImgSrc = reactive({ value: '' });
 let nftPrice = reactive({ value: 0 });
 let nftOwnerUsername = reactive({ value: '' });
-let displaySuccessMessage = reactive({ value: false });
-let displayFailureMessage = reactive({ value: false });
+let onSaleMessage = reactive({value: 'Not On Sale', color: 'red'})
 let isOnSale = reactive({ value: false });
 let displayOwnerOptions = reactive({ value: false });
 let newNftPrice = reactive({ value: 0 });
 const route = useRoute();
 
 async function setPrice() {
-    displaySuccessMessage.value = false;
-    displayFailureMessage.value = false;
+
     try {
         let response = await axios.put(`http://127.0.0.1:4000/nfts/${route.params.nftId}/set-price/${newNftPrice}`);
         if (response.status === 200) {
             nftPrice.value = response.data['price'];
-            displaySuccessMessage.value = true;
+
             return;
         }
     }
     catch (err) {
         console.log(err);
     }
-    displayFailureMessage.value = true;
+
 }
 
 async function putOnSale(){
-    displaySuccessMessage.value = false;
-    displayFailureMessage.value = false;
+
     try {
-        let response = await axios.put(`http://127.0.0.1:4000/nfts/${route.params.nftId}/set-price/${newNftPrice}`);
+        let response = await axios.put(`http://127.0.0.1:4000/nfts/${route.params.nftId}/put-on-sale/${newNftPrice}`);
         if (response.status === 200) {
             nftPrice.value = response.data['price'];
-            displaySuccessMessage.value = true;
+
             return;
         }
     }
     catch (err) {
         console.log(err);
     }
-    displayFailureMessage.value = true;
+
 }
 
 
@@ -70,9 +67,6 @@ onMounted(async () => {
         else {
             displayOwnerOptions.value = false;
         }
-
-
-
     }
     catch (err) {
         console.log(err);
