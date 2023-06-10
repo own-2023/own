@@ -10,7 +10,7 @@ const useUserIdStore = defineStore('userId', () => {
     }
 
 
-    return { userId, getUserId, setUserId }
+    return { getUserId, setUserId }
 
 })
 

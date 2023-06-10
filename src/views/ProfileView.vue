@@ -20,28 +20,16 @@ let account = reactive({ value: { address: "", private_key: "", user_id: "", bal
 
 onMounted(async () => {
 
-    const [nftsReponse, accountResponse] = await Promise.all([
-        axios.get(`http://127.0.0.1:4000/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
-        axios.get(`http://127.0.0.1:4000/ethereum/get-account`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
-    ]);
-    const balanceResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-balance/${accountResponse.data.address}`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
-    nfts.value = nftsReponse.data;
-    account.value.private_key = accountResponse.data.private_key;
-    account.value.address = accountResponse.data.address;
-    account.value.balance = balanceResponse.data.balance;
+const [nftsReponse, accountResponse] = await Promise.all([
+    axios.get(`http://127.0.0.1:4000/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
+    axios.get(`http://127.0.0.1:4000/ethereum/get-account`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
+]);
+const balanceResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-balance/${accountResponse.data.address}`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
+nfts.value = nftsReponse.data;
+account.value.private_key = accountResponse.data.private_key;
+account.value.address = accountResponse.data.address;
+account.value.balance = balanceResponse.data.balance;
 })
-
-    nfts.value = nftsResponse.data;
-    userNfts = userNftsResponse.data;
-    account = accountResponse.data;
-    account.balance = balanceResponse.data.balance;
-
-    console.log(userNfts);
-
-  } catch (error) {
-    console.error('An error occurred:', error);
-  }
-});
 
 
 
