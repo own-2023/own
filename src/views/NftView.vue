@@ -1,39 +1,5 @@
 <script setup lang="ts">
 import Navbar from '@/components/Navbar.vue';
-import axios from 'axios';
-import { onMounted, reactive } from 'vue';
-import { useRoute } from 'vue-router';
-import type { AxiosResponse } from 'axios';
-import useUsernameStore from '@/stores/usernameStore';
-import useTokenStore from '@/stores/tokenStore';
-const usernameStore = useUsernameStore()
-const tokenStore = useTokenStore();
-
-let nftName = reactive({ value: '' });
-let nftImgSrc = reactive({ value: '' });
-let nftPrice = reactive({ value: 0 });
-let nftOwnerUsername = reactive({ value: '' });
-let onSaleMessage = reactive({ value: 'Not On Sale', color: 'red' })
-let isOnSale = reactive({ value: false, message: 'Put On Sale' });
-let displayOwnerOptions = reactive({ value: false });
-let newNftPrice = reactive({ value: 0 });
-const route = useRoute();
-
-async function putOnSale() {
-    try {
-        let response = await axios.put(`http://127.0.0.1:4000/nfts/${route.params.nftId}/put-on-sale/${newNftPrice}`);
-        if (response.status === 200) {
-            nftPrice.value = response.data['price'];
-            onSaleMessage.value = 'On Sale';
-            onSaleMessage.color = '#00e600';
-            isOnSale.message = 'Set Price'
-            isOnSale.value = true;
-        }
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
 
 
 onMounted(async () => {

@@ -6,6 +6,10 @@ import WalletCard from '@/components/WalletCard.vue';
 import NftCardGroup from '@/components/NftCardGroup.vue';
 import axios from 'axios';
 import useTokenStore from '@/stores/tokenStore';
+import type { UserLazyMintNftDto, AccountDto } from '@/types/types';
+
+
+
 
 
 const tokenStore = useTokenStore();
@@ -26,6 +30,18 @@ onMounted(async () => {
     account.value.address = accountResponse.data.address;
     account.value.balance = balanceResponse.data.balance;
 })
+
+    nfts.value = nftsResponse.data;
+    userNfts = userNftsResponse.data;
+    account = accountResponse.data;
+    account.balance = balanceResponse.data.balance;
+
+    console.log(userNfts);
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+});
 
 
 

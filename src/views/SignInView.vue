@@ -8,6 +8,7 @@ import axios, { AxiosError } from 'axios';
 import { reactive } from 'vue';
 import router from '@/router';
 import NavbarLogo from '@/components/NavbarLogo.vue';
+import useUserIdStore from '@/stores/useridStore';
 
 let email: string = ''
 let password: string = ''
@@ -22,11 +23,15 @@ async function signIn() {
         const tokenStore = useTokenStore();
         const userStore = useUsernameStore();
         const emailStore = useEmailStore();
+        const userIdStore = useUserIdStore();
+
         userStore.setUsername(response.data['username']);
         emailStore.setEmail(email);
 
         tokenStore.setToken(response.data['token']);
-        router.push('/');
+        userIdStore.setUserId(response.data['user_id']);
+
+        router.push('/')
     }
     catch (error) {
         if (error instanceof AxiosError) {

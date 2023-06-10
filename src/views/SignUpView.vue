@@ -6,8 +6,10 @@ import router from '@/router';
 import useEmailStore from '@/stores/emailStore';
 import useTokenStore from '@/stores/tokenStore';
 import useUsernameStore from '@/stores/usernameStore';
+
 import AlertMessage from '@/components/AlertMessage.vue';
 import NavbarLogo from '@/components/NavbarLogo.vue';
+import useUserIdStore from '@/stores/useridStore';
 
 async function signUp() {
     displayGeneralErrorMessage.value = false;
@@ -21,15 +23,18 @@ async function signUp() {
 
     try {
         const response = await axios.post('http://127.0.0.1:3000/auth/sign-up', { username, password, email });
-        const emailStore = useEmailStore();
-        const tokenStore = useTokenStore();
-        const usernameStore = useUsernameStore();
-        emailStore.setEmail(email);
-        tokenStore.setToken(response.data['token']);
-        usernameStore.setUsername(username);
-        router.push({
-            name: 'home'
-        })
+        if (response.status == 204) {
+            const emailStore = useEmailStore();
+            const tokenStore = useTokenStore();
+            const usernameStore = useUsernameStore();
+            const userIdStore = useUserIdStore();
+            emailStore.setEmail(email);
+            tokenStore.setToken(response.data['token']);
+            usernameStore.setUsername(username);
+            userIdStore.setUserId(response.data['user_id']);
+            console.log(tokenStore.getToken)
+            router.push('/');
+        }
     }
     catch (err) {
         if (err instanceof AxiosError) {
