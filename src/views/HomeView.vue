@@ -20,11 +20,9 @@ onMounted(async () => {
     catch (err) {
         console.log(err);
     }
-    
 })
 
 </script>
-
 
 
 <template>

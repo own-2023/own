@@ -15,7 +15,6 @@ let nftPrice = reactive({ value: 0 });
 let nftOwnerUsername = reactive({ value: '' });
 let onSaleMessage = reactive({ value: 'Not On Sale', color: 'red' })
 let isOnSale = reactive({ value: false, message: 'Put On Sale' });
-
 let displayOwnerOptions = reactive({ value: false });
 let newNftPrice = reactive({ value: 0 });
 const route = useRoute();
