@@ -29,7 +29,7 @@ async function signIn() {
         emailStore.setEmail(email);
 
         tokenStore.setToken(response.data['token']);
-        userIdStore.setUserId(response.data['user_id']);
+        userIdStore.setUserId(response.data['userId']);
 
         router.push('/')
     }

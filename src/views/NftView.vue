@@ -6,8 +6,11 @@ import { useRoute } from 'vue-router';
 import type { AxiosResponse } from 'axios';
 import useUsernameStore from '@/stores/usernameStore';
 import useTokenStore from '@/stores/tokenStore';
+import useUserIdStore from '@/stores/useridStore';
+
 const usernameStore = useUsernameStore()
 const tokenStore = useTokenStore();
+const userIdStore = useUserIdStore();
 
 let nftName = reactive({ value: '' });
 let nftImgSrc = reactive({ value: '' });
@@ -30,6 +33,16 @@ async function putOnSale() {
             isOnSale.message = 'Set Price'
             isOnSale.value = true;
         }
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+async function buy() {
+    console.log(userIdStore.getUserId)
+    try {
+        let response = await axios.post(`http://127.0.0.1:4000/nfts/buy/${route.params.nftId}`, {buyerId: userIdStore.getUserId}, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
     }
     catch (err) {
         console.log(err);
@@ -81,7 +94,7 @@ onMounted(async () => {
             <h5>{{ nftPrice.value }} ETH</h5>
             <h6 :color="onSaleMessage.color" v-if="displayOwnerOptions.value">{{ onSaleMessage.value }}</h6>
             <button type="button" class="btn btn-primary mb-3"
-                v-if="tokenStore.isAuthenticated && !displayOwnerOptions.value">Buy</button>
+                v-if="tokenStore.isAuthenticated && !displayOwnerOptions.value" @click="buy">Buy</button>
             <button class="btn btn-primary mb-3" href="#" role="button" v-if="displayOwnerOptions.value"
                 @click="putOnSale">{{ isOnSale.message }}</button>
             <div class="form-floating mb-3" v-if="displayOwnerOptions.value">

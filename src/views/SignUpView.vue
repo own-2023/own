@@ -31,7 +31,7 @@ async function signUp() {
             emailStore.setEmail(email);
             tokenStore.setToken(response.data['token']);
             usernameStore.setUsername(username);
-            userIdStore.setUserId(response.data['user_id']);
+            userIdStore.setUserId(response.data['userId']);
             console.log(tokenStore.getToken)
             router.push('/');
         }
