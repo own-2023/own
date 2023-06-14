@@ -11,14 +11,19 @@ const tokenStore = useTokenStore()
 
 let nftName: string;
 let imageFile: File;
-let statusText = reactive({ status: 'Upload nft' });
+let statusText = reactive({ status: '' });
 
 async function onClick(event: MouseEvent) {
     let form: FormData = new FormData();
     form.set('file', imageFile);
     form.set('nftName', nftName);
     const resData = await axios.post(`http://127.0.0.1:4000/ipfs/upload`, form, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
-    statusText.status = resData.statusText;
+    if(resData.status === 207){
+        statusText.status = 'Success'
+    }
+    else{
+        statusText.status = 'Failed'
+    }
 }
 function onChange(event: Event) {
     const target = event.target as HTMLInputElement;
