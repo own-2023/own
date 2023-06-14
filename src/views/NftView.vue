@@ -56,7 +56,8 @@ async function buy() {
     try {
         let response = await axios.post(`http://127.0.0.1:4000/nfts/buy/${route.params.nftId}`, { buyerId: userIdStore.getUserId }, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
         if(response.status === 200){
-            router.go(0)
+            router.back(); // Navigates back to the previous page
+            //router.go(0)
         }
     }
     catch (err) {
