@@ -5,6 +5,8 @@ import axios from 'axios';
 import Navbar from '@/components/Navbar.vue';
 import { reactive } from 'vue';
 import useTokenStore from '@/stores/tokenStore';
+import { inject } from 'vue'
+
 
 const tokenStore = useTokenStore()
 
@@ -12,12 +14,14 @@ const tokenStore = useTokenStore()
 let nftName: string;
 let imageFile: File;
 let statusText = reactive({ status: 'Upload nft' });
+const blockchainBaseUrl = inject('blockchain_base_url');
+
 
 async function onClick(event: MouseEvent) {
     let form: FormData = new FormData();
     form.set('file', imageFile);
     form.set('nftName', nftName);
-    const resData = await axios.post(`http://127.0.0.1:4000/ipfs/upload`, form, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
+    const resData = await axios.post(`${blockchainBaseUrl}/ipfs/upload`, form, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
     statusText.status = resData.statusText;
 }
 function onChange(event: Event) {

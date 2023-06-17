@@ -8,10 +8,14 @@ import useUsernameStore from '@/stores/usernameStore';
 import useTokenStore from '@/stores/tokenStore';
 import useUserIdStore from '@/stores/useridStore';
 import router from '@/router';
+import { inject } from 'vue'
+
 
 const usernameStore = useUsernameStore()
 const tokenStore = useTokenStore();
 const userIdStore = useUserIdStore();
+const blockchainBaseUrl = inject('blockchain_base_url');
+
 
 let nftName = reactive({ value: '' });
 let nftImgSrc = reactive({ value: '' });
@@ -26,7 +30,7 @@ const route = useRoute();
 
 async function setPrice() {
     try {
-        let response = await axios.put(`http://127.0.0.1:4000/nfts/${route.params.nftId}/set-price/${newNftPrice.value}`);
+        let response = await axios.put(`${blockchainBaseUrl}/nfts/${route.params.nftId}/set-price/${newNftPrice.value}`);
         if (response.status === 200) {
             nftPrice.value = response.data['price'] 
         }
@@ -39,7 +43,7 @@ async function setPrice() {
 
 async function putOnSale() {
     try {
-        let response = await axios.put(`http://127.0.0.1:4000/nfts/${route.params.nftId}/put-on-sale`);
+        let response = await axios.put(`${blockchainBaseUrl}/nfts/${route.params.nftId}/put-on-sale`);
         if (response.status === 200) {
             onSaleMessage.value = 'On Sale';
             onSaleMessage.color = '#00e600';
@@ -54,7 +58,7 @@ async function putOnSale() {
 async function buy() {
     console.log(userIdStore.getUserId)
     try {
-        let response = await axios.post(`http://127.0.0.1:4000/nfts/buy/${route.params.nftId}`, { buyerId: userIdStore.getUserId }, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
+        let response = await axios.post(`${blockchainBaseUrl}/nfts/buy/${route.params.nftId}`, { buyerId: userIdStore.getUserId }, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
         if(response.status === 200){
             router.back(); // Navigates back to the previous page
             //router.go(0)
@@ -69,7 +73,7 @@ async function buy() {
 onMounted(async () => {
     let response: AxiosResponse<any, any>;
     try {
-        response = await axios.get(`http://127.0.0.1:4000/nfts/${route.params.nftId}`);
+        response = await axios.get(`${blockchainBaseUrl}/nfts/${route.params.nftId}`);
         nftPrice.value = response.data['nftPrice'];
         nftName.value = response.data['nftName'];
         nftImgSrc.value = response.data['nftUrl'];

@@ -7,10 +7,12 @@ import NftCardGroup from '@/components/NftCardGroup.vue';
 import axios from 'axios';
 import useTokenStore from '@/stores/tokenStore';
 import type { UserLazyMintNftDto, AccountDto } from '@/types/types';
+import { inject } from 'vue'
 
 
 
 
+const blockchainBaseUrl = inject('blockchain_base_url');
 
 const tokenStore = useTokenStore();
 let nfts = reactive({ value: [] });
@@ -21,10 +23,10 @@ let account = reactive({ value: { address: "", private_key: "", user_id: "", bal
 onMounted(async () => {
 
 const [nftsReponse, accountResponse] = await Promise.all([
-    axios.get(`http://127.0.0.1:4000/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
-    axios.get(`http://127.0.0.1:4000/ethereum/get-account`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
+    axios.get(`${blockchainBaseUrl}/nfts/get-user-nfts`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
+    axios.get(`${blockchainBaseUrl}/ethereum/get-account`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } }),
 ]);
-const balanceResponse = await axios.get(`http://127.0.0.1:4000/ethereum/get-balance/${accountResponse.data.address}`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
+const balanceResponse = await axios.get(`${blockchainBaseUrl}/ethereum/get-balance/${accountResponse.data.address}`, { headers: { Authorization: `Bearer ${tokenStore.getToken}` } });
 nfts.value = nftsReponse.data;
 account.value.private_key = accountResponse.data.private_key;
 account.value.address = accountResponse.data.address;
