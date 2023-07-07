@@ -70,7 +70,6 @@ function setDisplayNftMetadatas(){
     </div>
     <div class="row align-content-center">
         <div class="mt-4 mb-4">
-            <h3 class="text-center">Owned Nfts</h3>
             <NftCardGroup :nfts=nfts.value v-if="displayOwnedNfts.value"></NftCardGroup>
             <NftMetadataCardGroup :nft-metadatas="nftMetadatas.value" v-if="displayNftMetadatas.value"></NftMetadataCardGroup>
         </div>

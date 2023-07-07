@@ -33,7 +33,7 @@ async function signUp() {
             usernameStore.setUsername(username);
             userIdStore.setUserId(response.data['userId']);
             console.log(tokenStore.getToken)
-            router.push('/');
+            
         }
     }
     catch (err) {
@@ -43,7 +43,7 @@ async function signUp() {
             displayGeneralErrorMessage.value = true;
         }
     }
-
+    await router.push('/');
 }
 
 let password: string;

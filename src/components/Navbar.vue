@@ -30,10 +30,10 @@
                         <RouterLink to="/nft-upload" class="nav-link text-white" role="button"
                             v-if="tokenStore.isAuthenticated">Upload NFT Metadata</RouterLink>
                     </li>
-
+                    
                     <li class="nav-fill">
                         <a href="" class="nav-link text-white" role="button" v-if="tokenStore.isAuthenticated"
-                            @click="resetStores()">Sign Out</a>
+                            @click="resetStores">Sign Out</a>
                     </li>
                 </ul>
             </div>
@@ -42,9 +42,11 @@
 </template>
 
 <script setup lang="ts">
+import router from '@/router';
 import { resetStores } from '@/stores/resetStores';
 import useTokenStore from '@/stores/tokenStore';
 const tokenStore = useTokenStore();
+
 </script>
 
 
