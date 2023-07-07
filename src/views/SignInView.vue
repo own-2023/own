@@ -9,6 +9,10 @@ import { reactive } from 'vue';
 import router from '@/router';
 import NavbarLogo from '@/components/NavbarLogo.vue';
 import useUserIdStore from '@/stores/useridStore';
+import { inject } from 'vue'
+
+const authBaseUrl = inject('auth_base_url');
+
 
 let email: string = ''
 let password: string = ''
@@ -19,7 +23,7 @@ async function signIn() {
     displayErrorMessage.value = false;
 
     try {
-        const response = await axios.post('http://127.0.0.1:3000/auth/sign-in', { email, password });
+        const response = await axios.post(`${authBaseUrl}/auth/sign-in`, { email, password });
         const tokenStore = useTokenStore();
         const userStore = useUsernameStore();
         const emailStore = useEmailStore();

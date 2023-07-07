@@ -5,13 +5,17 @@ import axios from 'axios';
 import Navbar from '@/components/Navbar.vue';
 import { reactive } from 'vue';
 import useTokenStore from '@/stores/tokenStore';
+import { inject } from 'vue'
+
 
 const tokenStore = useTokenStore()
 
 
 let nftName: string;
 let imageFile: File;
-let statusText = reactive({ status: '' });
+let statusText = reactive({ status: 'Upload nft' });
+const blockchainBaseUrl = inject('blockchain_base_url');
+
 
 async function onClick(event: MouseEvent) {
     let form: FormData = new FormData();

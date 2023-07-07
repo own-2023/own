@@ -9,10 +9,12 @@ import axios from 'axios';
 import useTokenStore from '@/stores/tokenStore';
 import useUserIdStore from '@/stores/useridStore';
 import type { UserLazyMintNftDto, AccountDto } from '@/types/types';
+import { inject } from 'vue'
 
 
 
 
+const blockchainBaseUrl = inject('blockchain_base_url');
 
 const tokenStore = useTokenStore();
 const userIdStore = useUserIdStore();

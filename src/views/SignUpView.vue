@@ -10,6 +10,11 @@ import useUsernameStore from '@/stores/usernameStore';
 import AlertMessage from '@/components/AlertMessage.vue';
 import NavbarLogo from '@/components/NavbarLogo.vue';
 import useUserIdStore from '@/stores/useridStore';
+import { inject } from 'vue'
+
+
+const authBaseUrl = inject('auth_base_url');
+
 
 async function signUp() {
     displayGeneralErrorMessage.value = false;
@@ -22,7 +27,7 @@ async function signUp() {
     }
 
     try {
-        const response = await axios.post('http://127.0.0.1:3000/auth/sign-up', { username, password, email });
+        const response = await axios.post(`${authBaseUrl}/auth/sign-up`, { username, password, email });
         if (response.status == 204) {
             const emailStore = useEmailStore();
             const tokenStore = useTokenStore();
